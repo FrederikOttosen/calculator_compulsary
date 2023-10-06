@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "/Users/frederikottosen/RiderProjects/calculator_compulsary/addition/addition.csproj": {}
+    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj": {}
   },
   "projects": {
-    "/Users/frederikottosen/RiderProjects/calculator_compulsary/addition/addition.csproj": {
+    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/frederikottosen/RiderProjects/calculator_compulsary/addition/addition.csproj",
+        "projectUniqueName": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
         "projectName": "addition",
-        "projectPath": "/Users/frederikottosen/RiderProjects/calculator_compulsary/addition/addition.csproj",
-        "packagesPath": "/Users/frederikottosen/.nuget/packages/",
-        "outputPath": "/Users/frederikottosen/RiderProjects/calculator_compulsary/addition/obj/",
+        "projectPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
+        "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,9 +41,41 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "EasyNetQ": {
+              "target": "Package",
+              "version": "[8.0.0-beta94, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.11, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "OpenTelemetry": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Exporter.Console": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Exporter.Zipkin": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Instrumentation.AspNetCore": {
+              "target": "Package",
+              "version": "[1.5.1-beta.1, )"
+            },
+            "OpenTelemetry.Instrumentation.Http": {
+              "target": "Package",
+              "version": "[1.5.1-beta.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -66,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

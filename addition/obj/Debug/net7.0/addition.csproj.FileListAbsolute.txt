@@ -1,0 +1,7 @@
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.csproj.AssemblyReference.cache
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.AssemblyInfoInputs.cache
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.AssemblyInfo.cs
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.csproj.CoreCompileInputs.cache
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\frede\Desktop\Gitlab\calculator_compulsary\addition\obj\Debug\net7.0\addition.MvcApplicationPartsAssemblyInfo.cache
