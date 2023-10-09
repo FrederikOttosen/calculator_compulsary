@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   addition:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
     build:
       context: .
       dockerfile: addition/Dockerfile
@@ -11,6 +12,7 @@ services:
       - calculator-db
 
   subtraction:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
     build:
       context: .
       dockerfile: subtraction/Dockerfile

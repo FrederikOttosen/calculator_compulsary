@@ -1479,27 +1479,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\frede\\.nuget\\packages\\": {}
+    "/Users/frederikottosen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
+      "projectUniqueName": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj",
       "projectName": "addition",
-      "projectPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
-      "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\obj\\",
+      "projectPath": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj",
+      "packagesPath": "/Users/frederikottosen/.nuget/packages/",
+      "outputPath": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1578,7 +1575,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }
