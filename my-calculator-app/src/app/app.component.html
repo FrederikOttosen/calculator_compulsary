@@ -1,6 +1,3 @@
-<button (click)="onSubtractionClickOld({Number1: 2, Number2: 3})">Subtraction</button>
-<button (click)="onAdditionClickOld({Number1: 2, Number2: 3})">Addition</button>
-
 <div id="calculator">
   <div id="input-wrap">
     <div id="tmp">{{tempCount()}}</div>
@@ -9,18 +6,18 @@
   <div id="button-wrap">
     <button id="all-clear" (click)="onClickClearAll()">AC</button>
     <button id="clear" (click)="onClickClearCount()">C</button>
-    <button id="sign">+/-</button>
+    <button id="sign" (click)="onSignChangeClick()">+/-</button>
     <button class="amt divide">/</button>
 
     <button class="number" (click)="onNumberClick(7)">7</button>
     <button class="number" (click)="onNumberClick(8)">8</button>
-    <button class="number" (click)="onNumberClick(-9)">9</button>
+    <button class="number" (click)="onNumberClick(9)">9</button>
     <button class="amt times" (click)="onOperationClick('+')">*</button>
 
     <button class="number" (click)="onNumberClick(4)">4</button>
     <button class="number" (click)="onNumberClick(5)">5</button>
     <button class="number" (click)="onNumberClick(6)">6</button>
-    <button class="amt minus">-</button>
+    <button class="amt minus" (click)="onOperationClick('-')">-</button>
 
     <button class="number" (click)="onNumberClick(1)">1</button>
     <button class="number" (click)="onNumberClick(2)">2</button>

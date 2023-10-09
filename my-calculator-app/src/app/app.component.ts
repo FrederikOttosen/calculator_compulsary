@@ -1,6 +1,5 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {single} from "rxjs";
 
 export interface requestBody {
   Number1: number,
@@ -13,14 +12,24 @@ export interface requestBody {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-calculator-app';
-
   count = signal<string>('');
   tempCount = signal<string>('');
   calculationCount = signal<number>(0);
 
   constructor(
     private http: HttpClient) {
+  }
+
+  onSignChangeClick() {
+    let currentVal = this.count();
+    // Check if the current value is negative.
+    if (currentVal.startsWith('-')) {
+      // Remove the '-' sign to make it positive.
+      this.count.set(currentVal.slice(1));
+    } else {
+      // Add a '-' sign to make it negative.
+      this.count.set('-' + currentVal);
+    }
   }
 
   onClickClearCount() {
@@ -30,23 +39,8 @@ export class AppComponent {
   onClickClearAll() {
     this.count.set('');
     this.tempCount.set('');
+    this.calculationCount.set(0);
   }
-
-
-/*  onResultClick() {
-    const finalString = this.tempCount() + this.count();
-    const operations = this.parseOperations(finalString);  // Assume parseOperations does the parsing as previously discussed
-
-    operations.reduce((previousPromise, currentOperation) => {
-      return previousPromise.then(() => this.performOperation(currentOperation));
-    }, Promise.resolve())
-      .then(() => {
-        console.log('All operations completed!');
-      })
-      .catch((error: any) => {
-        console.error('An error occurred:', error);
-      });
-  }*/
 
   onOperationClick(operator: string) {
     this.tempCount.set(this.tempCount() + ' ' + this.count() + ' ' + operator)
@@ -92,47 +86,6 @@ export class AppComponent {
     return operations;
   }
 
-
-
-  public onAdditionClick(requestBody: requestBody) {
-    const additionEndpoint = '/addition/';
-    this.http.post(additionEndpoint, requestBody).subscribe(
-      (response: any) => {
-        const resultElement = document.getElementById("input");
-        if (resultElement) {
-          resultElement.innerText = response.toString(); // Assuming your response has a "result" property
-        }
-      },
-      (error) => {
-        console.error(error); // Log the error
-      }
-    );
-  }
-
-  public onSubtractionClickOld(requestBody: requestBody) {
-    const additionEndpoint = '/subtraction/';
-    this.http.post(additionEndpoint, requestBody).subscribe(
-      (response) => {
-        console.log(response)
-      },
-      (error) => {
-        console.error(error); // Log the error
-      }
-    );
-  }
-
-  public onAdditionClickOld(requestBody: requestBody) {
-    const additionEndpoint = '/addition/';
-    this.http.post(additionEndpoint, requestBody).subscribe(
-      (response) => {
-        console.log(response)
-      },
-      (error) => {
-        console.error(error); // Log the error
-      });
-  }
-
-
   public onSubtractionClick(requestBody: requestBody) {
     const subtractionEndpoint = '/subtraction/';
     this.http.post(subtractionEndpoint, requestBody).subscribe(
@@ -148,12 +101,12 @@ export class AppComponent {
     );
   }
 
-private performOperation(currentOperation: any): Promise<number> {
+  private performOperation(currentOperation: any): Promise<number> {
     switch (currentOperation.operator) {
       case '+':
-        return this.performAddition(currentOperation);
+        return this.performAddition(currentOperation.operand);
       case '-':
-        //return this.performSubtraction(currentOperation);
+        return this.performSubtraction(currentOperation.operand);
       default:
         return Promise.reject(new Error('Unsupported operation'));
     }
@@ -175,16 +128,37 @@ private performOperation(currentOperation: any): Promise<number> {
     });
   }
 
+  private performSubtraction(numberToAdd: number): Promise<number> {
+    const subtractionEndpoint = '/subtraction/';
+    return new Promise((resolve, reject) => {
+      this.http.post(subtractionEndpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
+        (response: any) => {
+          this.calculationCount.set(response);
+          resolve(response.result);
+        },
+        (error) => {
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
+  }
+
   async onResultClickTest() {
     const finalString = this.tempCount() + ' ' + this.count();
-    const operations = this.parseOperations(finalString);
+    let operations = this.parseOperations(finalString);
 
-    operations[0].operator = '+';
-
-    console.log(operations)
+    if (this.calculationCount() === 0) {
+      operations[0].operator = '+';
+    } else {
+      operations = operations.slice(1);
+    }
 
     for (const operation of operations) {
       await this.performOperation(operation);
     }
+
+    this.tempCount.set('');
+    this.count.set(this.calculationCount().toString());
   }
 }
