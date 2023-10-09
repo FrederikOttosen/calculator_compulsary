@@ -10,6 +10,26 @@ services:
       replicas: 3
     depends_on:
       - calculator-db
+        
+  multiplication:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
+    build:
+      context: .
+      dockerfile: multiplication/Dockerfile
+    deploy:
+      replicas: 3
+    depends_on:
+      - calculator-db
+      
+  division:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
+    build:
+      context: .
+      dockerfile: division/Dockerfile
+    deploy:
+      replicas: 3
+    depends_on:
+      - calculator-db
 
   subtraction:
     image: mcr.microsoft.com/dotnet/sdk:7.0

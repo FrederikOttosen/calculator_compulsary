@@ -104,37 +104,28 @@ export class AppComponent {
   private performOperation(currentOperation: any): Promise<number> {
     switch (currentOperation.operator) {
       case '+':
-        return this.performAddition(currentOperation.operand);
+        let endpoint = '/addition/';
+        return this.performCalculation(endpoint, currentOperation.operand);
       case '-':
-        return this.performSubtraction(currentOperation.operand);
+        let endpointSub = '/subtraction/';
+        return this.performCalculation(endpointSub, currentOperation.operand);
+      case '/':
+        let endpointDiv = '/division/';
+        return this.performCalculation(endpointDiv, currentOperation.operand);
+      case '*':
+        let endpointMulti = '/multiplication/';
+        return this.performCalculation(endpointMulti, currentOperation.operand);
       default:
         return Promise.reject(new Error('Unsupported operation'));
     }
   }
 
-  private performAddition(numberToAdd: number): Promise<number> {
-    const additionEndpoint = '/addition/';
+  private performCalculation(endpoint: string, numberToAdd: number): Promise<number> {
     return new Promise((resolve, reject) => {
-      this.http.post(additionEndpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
+      this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {
           this.calculationCount.set(response);
-          resolve(response.result); // Assuming the backend returns the result under the key "result"
-        },
-        (error) => {
-          console.error(error);
-          reject(error);
-        }
-      );
-    });
-  }
-
-  private performSubtraction(numberToAdd: number): Promise<number> {
-    const subtractionEndpoint = '/subtraction/';
-    return new Promise((resolve, reject) => {
-      this.http.post(subtractionEndpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
-        (response: any) => {
-          this.calculationCount.set(response);
-          resolve(response.result);
+          resolve(response);
         },
         (error) => {
           console.error(error);
@@ -148,13 +139,17 @@ export class AppComponent {
     const finalString = this.tempCount() + ' ' + this.count();
     let operations = this.parseOperations(finalString);
 
-    if (this.calculationCount() === 0) {
+    if (this.calculationCount() !== operations[0].operand) {
+      this.calculationCount.set(0);
       operations[0].operator = '+';
     } else {
       operations = operations.slice(1);
     }
 
     for (const operation of operations) {
+      if (!operation.operand) {
+        operation.operand = 0;
+      }
       await this.performOperation(operation);
     }
 
