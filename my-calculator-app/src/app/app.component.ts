@@ -120,7 +120,7 @@ export class AppComponent {
     }
   }
 
-  private performCalculation(endpoint: string, numberToAdd: number): Promise<number> {
+  public performCalculation(endpoint: string, numberToAdd: number): Promise<number> {
     return new Promise((resolve, reject) => {
       this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {

@@ -12,7 +12,7 @@ public class MultiplicationController : ControllerBase
     {
         try
         {
-            decimal result = request.Number1 - request.Number2;
+            decimal result = request.Number1 * request.Number2;
             // You can store the calculation result in your database here.
             return Ok(result);
         }
