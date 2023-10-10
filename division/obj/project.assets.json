@@ -469,24 +469,27 @@
     ]
   },
   "packageFolders": {
-    "/Users/frederikottosen/.nuget/packages/": {}
+    "C:\\Users\\frede\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/frederikottosen/Desktop/calculator_compulsary/division/division.csproj",
+      "projectUniqueName": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\division\\division.csproj",
       "projectName": "division",
-      "projectPath": "/Users/frederikottosen/Desktop/calculator_compulsary/division/division.csproj",
-      "packagesPath": "/Users/frederikottosen/.nuget/packages/",
-      "outputPath": "/Users/frederikottosen/Desktop/calculator_compulsary/division/obj/",
+      "projectPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\division\\division.csproj",
+      "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\division\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -533,7 +536,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
