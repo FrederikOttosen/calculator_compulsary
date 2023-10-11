@@ -2,6 +2,7 @@ using addition.Models;
 using Microsoft.AspNetCore.Mvc;
 using multiplication.Models;
 using RestSharp;
+using OpenTelemetry.Trace;
 
 namespace multiplication.Controllers;
 
@@ -9,20 +10,24 @@ namespace multiplication.Controllers;
 [Route("api/multiplication")]
 public class MultiplicationController : ControllerBase
 {
-    
     private const string BaseUrl = "http://storage-handler/";
-    private static RestClient _restClient = new RestClient(BaseUrl);
+    private static readonly RestClient RestClient = new RestClient(BaseUrl);
+    private readonly Tracer _tracer;
+    
+    public MultiplicationController(Tracer tracer)
+    {
+        _tracer = tracer;
+    }
     
     [HttpPost]
-    public async Task<ActionResult<decimal>> Multiply([FromBody] MultiplicationRequest request)
+    public async Task<ActionResult<decimal>> Multiply([FromBody] MultiplicationRequest? request)
     {
+        using var startSpan = _tracer.StartActiveSpan("Multiplication_Started");
         
-        if (request == null || request.Number2 == 0)
-        {
-            return BadRequest("Invalid input data");
-        }
+        if (request == null || request.Number2 == 0) { return BadRequest("Invalid input data"); }
     
-        decimal result = request.Number1 * request.Number2;
+        using var calculationSpan = _tracer.StartActiveSpan("Multiplication_Performing");
+        var result = request.Number1 * request.Number2;
 
         List<CalculationEntity> history = null;
         try
@@ -33,6 +38,8 @@ public class MultiplicationController : ControllerBase
         {
             Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
         }
+        
+        using var returnSpan = _tracer.StartActiveSpan("Multiplication_Completed");
         return Ok(new ResponseDto
         {
             Response = result,
@@ -51,7 +58,7 @@ public class MultiplicationController : ControllerBase
         var saveCalculationrequest = new RestRequest("storage", Method.Post);
         saveCalculationrequest.AddJsonBody(calculationEntity);
     
-        var saveResponse = await _restClient.ExecuteAsync(saveCalculationrequest);
+        var saveResponse = await RestClient.ExecuteAsync(saveCalculationrequest);
         if (!saveResponse.IsSuccessful)
         {
             Console.WriteLine("Failed to store calculation: " + saveResponse.ErrorMessage);
@@ -59,7 +66,7 @@ public class MultiplicationController : ControllerBase
         }
 
         var getCalculationRequest = new RestRequest("storage", Method.Get);
-        var getResponse = await _restClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
+        var getResponse = await RestClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
         if (!getResponse.IsSuccessful || getResponse.Data?.Count == 0)
         {
             Console.WriteLine("Failed to retrieve history: " + getResponse.ErrorMessage);

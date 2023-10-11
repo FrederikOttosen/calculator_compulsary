@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using subtraction.Models;
+using OpenTelemetry.Trace;
 
 namespace subtraction.Controllers;
 
@@ -10,16 +11,22 @@ namespace subtraction.Controllers;
 public class SubtractionController : ControllerBase
 {
     private const string BaseUrl = "http://storage-handler/";
-    private static RestClient _restClient = new RestClient(BaseUrl);
-    [HttpPost]
-    public async Task<ActionResult<decimal>> Subtract([FromBody] SubtractionRequest request)
-    {
-        if (request == null)
-        {
-            return BadRequest("Invalid input data");
-        }
+    private static readonly RestClient RestClient = new RestClient(BaseUrl);
+    private readonly Tracer _tracer;
     
-        decimal result = request.Number1 - request.Number2;
+    public SubtractionController(Tracer tracer)
+    {
+        _tracer = tracer;
+    }
+    
+    [HttpPost]
+    public async Task<ActionResult<decimal>> Subtract([FromBody] SubtractionRequest? request)
+    {
+        using var startSpan = _tracer.StartActiveSpan("Subtraction_Started");
+        if (request == null) { return BadRequest("Invalid input data"); }
+    
+        using var calculationSpan = _tracer.StartActiveSpan("Subtraction_Performing");
+        var result = request.Number1 - request.Number2;
 
         List<CalculationEntity> history = null;
         try
@@ -31,6 +38,7 @@ public class SubtractionController : ControllerBase
             Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
         }
     
+        using var returnSpan = _tracer.StartActiveSpan("Subtraction_Completed");
         return Ok(new ResponseDto
         {
             Response = result,
@@ -49,7 +57,7 @@ public class SubtractionController : ControllerBase
         var saveCalculationrequest = new RestRequest("storage", Method.Post);
         saveCalculationrequest.AddJsonBody(calculationEntity);
     
-        var saveResponse = await _restClient.ExecuteAsync(saveCalculationrequest);
+        var saveResponse = await RestClient.ExecuteAsync(saveCalculationrequest);
         if (!saveResponse.IsSuccessful)
         {
             Console.WriteLine("Failed to store calculation: " + saveResponse.ErrorMessage);
@@ -57,7 +65,7 @@ public class SubtractionController : ControllerBase
         }
 
         var getCalculationRequest = new RestRequest("storage", Method.Get);
-        var getResponse = await _restClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
+        var getResponse = await RestClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
         if (!getResponse.IsSuccessful || getResponse.Data?.Count == 0)
         {
             Console.WriteLine("Failed to retrieve history: " + getResponse.ErrorMessage);

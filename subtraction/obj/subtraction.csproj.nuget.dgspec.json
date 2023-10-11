@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj": {}
+    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\subtraction\\subtraction.csproj": {}
   },
   "projects": {
-    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj": {
+    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\subtraction\\subtraction.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
+        "projectUniqueName": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\subtraction\\subtraction.csproj",
         "projectName": "subtraction",
-        "projectPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
-        "packagesPath": "/Users/mac2/.nuget/packages/",
-        "outputPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/obj/",
+        "projectPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\subtraction\\subtraction.csproj",
+        "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\subtraction\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/mac2/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +44,30 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.11, )"
+            },
+            "OpenTelemetry": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Exporter.Console": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Exporter.Zipkin": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "OpenTelemetry.Instrumentation.AspNetCore": {
+              "target": "Package",
+              "version": "[1.5.1-beta.1, )"
+            },
+            "OpenTelemetry.Instrumentation.Http": {
+              "target": "Package",
+              "version": "[1.5.1-beta.1, )"
             },
             "RestSharp": {
               "target": "Package",
@@ -70,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
