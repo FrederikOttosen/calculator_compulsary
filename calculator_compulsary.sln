@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "division", "division\divisi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multiplication", "multiplication\multiplication.csproj", "{45285CFF-0906-4ADD-9D4D-1EC343598D0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "storage-handler", "storage-handler\storage-handler.csproj", "{32A1AD7F-BAC1-477D-A9BE-C05630883597}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{45285CFF-0906-4ADD-9D4D-1EC343598D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45285CFF-0906-4ADD-9D4D-1EC343598D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45285CFF-0906-4ADD-9D4D-1EC343598D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A1AD7F-BAC1-477D-A9BE-C05630883597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A1AD7F-BAC1-477D-A9BE-C05630883597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A1AD7F-BAC1-477D-A9BE-C05630883597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A1AD7F-BAC1-477D-A9BE-C05630883597}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

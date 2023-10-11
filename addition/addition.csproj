@@ -17,6 +17,7 @@
         <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" />
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.5.1-beta.1" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.5.1-beta.1" />
+        <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.13" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 

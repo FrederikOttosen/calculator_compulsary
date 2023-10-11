@@ -1,36 +1,48 @@
-<button (click)="performCalculation('/addition/', 5)">Addition</button>
-<button (click)="performCalculation('/multiplication/', 5)">Multiplicaation</button>
-<button (click)="performCalculation('/subtraction/', 5)">Subtraction</button>
-<button (click)="performCalculation('/division/', 5)">Division</button>
+<div class="MainWrapper">
+  <article class="ButtonContainer">
+    <button (click)="performCalculation('/addition/', 5)">Addition</button>
+    <button (click)="performCalculation('/multiplication/', 5)">Multiplicaation</button>
+    <button (click)="performCalculation('/subtraction/', 5)">Subtraction</button>
+    <button (click)="performCalculation('/division/', 5)">Division</button>
+  </article>
 
-<div id="calculator">
-  <div id="input-wrap">
-    <div id="tmp">{{tempCount()}}</div>
-    <div id="input">{{count()}}</div>
+  <div id="calculator">
+    <div id="input-wrap">
+      <div id="tmp">{{tempCount()}}</div>
+      <div id="input">{{count()}}</div>
+    </div>
+    <div id="button-wrap">
+      <button id="all-clear" (click)="onClickClearAll()">AC</button>
+      <button id="clear" (click)="onClickClearCount()">C</button>
+      <button id="sign" (click)="onSignChangeClick()">+/-</button>
+      <button class="amt divide" (click)="onOperationClick('/')">/</button>
+
+      <button class="number" (click)="onNumberClick(7)">7</button>
+      <button class="number" (click)="onNumberClick(8)">8</button>
+      <button class="number" (click)="onNumberClick(9)">9</button>
+      <button class="amt times" (click)="onOperationClick('*')">*</button>
+
+      <button class="number" (click)="onNumberClick(4)">4</button>
+      <button class="number" (click)="onNumberClick(5)">5</button>
+      <button class="number" (click)="onNumberClick(6)">6</button>
+      <button class="amt minus" (click)="onOperationClick('-')">-</button>
+
+      <button class="number" (click)="onNumberClick(1)">1</button>
+      <button class="number" (click)="onNumberClick(2)">2</button>
+      <button class="number" (click)="onNumberClick(3)">3</button>
+      <button class="amt plus" (click)="onOperationClick('+')">+</button>
+
+      <button class="number num-0" (click)="onNumberClick(0)">0</button>
+      <button id="dot">.</button>
+      <button id="result" (click)="onResultClickTest()">=</button>
+    </div>
   </div>
-  <div id="button-wrap">
-    <button id="all-clear" (click)="onClickClearAll()">AC</button>
-    <button id="clear" (click)="onClickClearCount()">C</button>
-    <button id="sign" (click)="onSignChangeClick()">+/-</button>
-    <button class="amt divide" (click)="onOperationClick('/')">/</button>
 
-    <button class="number" (click)="onNumberClick(7)">7</button>
-    <button class="number" (click)="onNumberClick(8)">8</button>
-    <button class="number" (click)="onNumberClick(9)">9</button>
-    <button class="amt times" (click)="onOperationClick('*')">*</button>
-
-    <button class="number" (click)="onNumberClick(4)">4</button>
-    <button class="number" (click)="onNumberClick(5)">5</button>
-    <button class="number" (click)="onNumberClick(6)">6</button>
-    <button class="amt minus" (click)="onOperationClick('-')">-</button>
-
-    <button class="number" (click)="onNumberClick(1)">1</button>
-    <button class="number" (click)="onNumberClick(2)">2</button>
-    <button class="number" (click)="onNumberClick(3)">3</button>
-    <button class="amt plus" (click)="onOperationClick('+')">+</button>
-
-    <button class="number num-0" (click)="onNumberClick(0)">0</button>
-    <button id="dot">.</button>
-    <button id="result" (click)="onResultClickTest()">=</button>
-  </div>
+  <article class="HistoryContainer">
+    <h1>Calculation history</h1>
+    <ul *ngFor="let item of history()">
+      {{item.expression}} = {{item.result}} on {{item.date}}
+    </ul>
+  </article>
 </div>
+
