@@ -32,6 +32,7 @@ body {
 #calculator {
   width: 90%;
   max-width: 430px;
+  max-height: 585px;
   padding: 25px;
   border-radius: 25px;
   background: linear-gradient(to bottom right, #404040, #0c0c0c);
@@ -102,5 +103,16 @@ body {
 .HistoryContainer{
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ButtonContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.MainWrapper{
+  display: flex;
+  flex-direction: row;
   gap: 1rem;
 }

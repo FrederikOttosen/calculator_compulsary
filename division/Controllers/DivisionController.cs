@@ -1,5 +1,7 @@
+using addition.Models;
 using Microsoft.AspNetCore.Mvc;
 using division.Models;
+using RestSharp;
 
 namespace division.Controllers;
 
@@ -7,19 +9,62 @@ namespace division.Controllers;
 [Route("api/division")]
 public class DivisionController: ControllerBase
 {
+    
+    private const string BaseUrl = "http://storage-handler/";
+    private static RestClient _restClient = new RestClient(BaseUrl);
+    
     [HttpPost]
-    public ActionResult<decimal> Divide([FromBody] DivisionRequest request)
+    public async Task<ActionResult<decimal>> Divide([FromBody] DivisionRequest request)
     {
+        if (request == null || request.Number2 == 0)
+        {
+            return BadRequest("Invalid input data");
+        }
+    
+        decimal result = request.Number1 / request.Number2;
+
+        List<CalculationEntity> history = null;
         try
         {
-            decimal result = request.Number1 / request.Number2;
-            // You can store the calculation result in your database here.
-            return Ok(result);
+            history = await StoreCalculationAndFetchHistory($"{request.Number1} / {request.Number2}", result);
         }
         catch (Exception ex)
         {
-            // Handle any errors or exceptions here.
-            return BadRequest(ex.Message);
+            Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
         }
+        return Ok(new ResponseDto
+        {
+            Response = result,
+            History = history
+        });
+    }
+    
+    private async Task<List<CalculationEntity>> StoreCalculationAndFetchHistory(string expression, decimal result)
+    {
+        var calculationEntity = new CalculationEntity
+        {
+            Expression = expression,
+            Result = result
+        };
+
+        var saveCalculationrequest = new RestRequest("storage", Method.Post);
+        saveCalculationrequest.AddJsonBody(calculationEntity);
+    
+        var saveResponse = await _restClient.ExecuteAsync(saveCalculationrequest);
+        if (!saveResponse.IsSuccessful)
+        {
+            Console.WriteLine("Failed to store calculation: " + saveResponse.ErrorMessage);
+            throw new Exception("Failed to store calculation");
+        }
+
+        var getCalculationRequest = new RestRequest("storage", Method.Get);
+        var getResponse = await _restClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
+        if (!getResponse.IsSuccessful || getResponse.Data?.Count == 0)
+        {
+            Console.WriteLine("Failed to retrieve history: " + getResponse.ErrorMessage);
+            throw new Exception("Failed to retrieve history");
+        }
+    
+        return getResponse.Data;
     }
 }
