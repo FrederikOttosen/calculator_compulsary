@@ -34,3 +34,10 @@
     <button id="result" (click)="onResultClickTest()">=</button>
   </div>
 </div>
+
+<article class="HistoryContainer">
+  <ul *ngFor="let item of history">
+    {{item.expression}} = {{item.result}} on {{item.date}}
+  </ul>
+</article>
+

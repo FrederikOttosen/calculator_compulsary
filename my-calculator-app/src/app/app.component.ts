@@ -1,5 +1,6 @@
 import {Component, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {HistoryEntity} from './Models/historyEntity';
 
 export interface requestBody {
   Number1: number,
@@ -15,6 +16,7 @@ export class AppComponent {
   count = signal<string>('');
   tempCount = signal<string>('');
   calculationCount = signal<number>(0);
+  history = signal<HistoryEntity[]>([])
 
   constructor(
     private http: HttpClient) {
@@ -124,8 +126,11 @@ export class AppComponent {
     return new Promise((resolve, reject) => {
       this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {
-          this.calculationCount.set(response);
-          resolve(response);
+          console.log(response)
+          console.log(response.history as HistoryEntity[])
+          this.calculationCount.set(response.response);
+          this.history.set(response.history)
+          resolve(response.response);
         },
         (error) => {
           console.error(error);

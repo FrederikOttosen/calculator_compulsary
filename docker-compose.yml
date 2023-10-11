@@ -7,8 +7,6 @@ services:
       dockerfile: addition/Dockerfile
     deploy:
       replicas: 1
-    depends_on:
-      - calculator-db
         
   multiplication:
     build:
@@ -17,7 +15,7 @@ services:
     deploy:
       replicas: 1
     depends_on:
-      - calculator-db
+      - storage-handler
       
   division:
     build:
@@ -25,8 +23,6 @@ services:
       dockerfile: division/Dockerfile
     deploy:
       replicas: 1
-    depends_on:
-      - calculator-db
 
   subtraction:
     build:
@@ -34,8 +30,16 @@ services:
       dockerfile: subtraction/Dockerfile
     deploy:
       replicas: 1
+    restart: on-failure
+    
+  storage-handler:
+    build:
+      context: .
+      dockerfile: storage-handler/Dockerfile
+    deploy:
+      replicas: 1
     depends_on:
-      - calculator-db
+      - calculation-history-db
     restart: on-failure
     
   frontend:
@@ -73,10 +77,12 @@ services:
       - multiplication
       - division
 
-  calculator-db:
+  calculation-history-db:
     image: "mysql"
     environment:
-      MYSQL_DATABASE: "calculator_db"
-      MYSQL_USER: "user"
-      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "calculation-history-database"
+      MYSQL_USER: "calculatorHistory"
+      MYSQL_PASSWORD: "C@ch3d1v"
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    ports:
+      - "3306:3306"

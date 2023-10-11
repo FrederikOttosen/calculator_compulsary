@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj": {}
+    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj": {}
   },
   "projects": {
-    "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj": {
+    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
+        "projectUniqueName": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj",
         "projectName": "addition",
-        "projectPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\addition.csproj",
-        "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\frede\\Desktop\\Gitlab\\calculator_compulsary\\addition\\obj\\",
+        "projectPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj",
+        "packagesPath": "/Users/mac2/.nuget/packages/",
+        "outputPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mac2/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -77,6 +74,10 @@
               "target": "Package",
               "version": "[1.5.1-beta.1, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.1-alpha.0.13, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -101,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }
