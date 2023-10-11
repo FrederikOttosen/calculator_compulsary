@@ -12,6 +12,7 @@ export interface requestBody {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   count = signal<string>('');
   tempCount = signal<string>('');
@@ -24,12 +25,9 @@ export class AppComponent {
 
   onSignChangeClick() {
     let currentVal = this.count();
-    // Check if the current value is negative.
     if (currentVal.startsWith('-')) {
-      // Remove the '-' sign to make it positive.
       this.count.set(currentVal.slice(1));
     } else {
-      // Add a '-' sign to make it negative.
       this.count.set('-' + currentVal);
     }
   }
@@ -54,20 +52,14 @@ export class AppComponent {
   }
 
   parseOperations(finalString: string) {
-    // Split the string based on spaces and then filter out any empty strings
     const parts = finalString.split(' ').filter(Boolean);
-
-    // Create an array to hold operations and their corresponding operands
     const operations: any = [];
-
     let currentOperator: string | null = null;
 
-    parts.forEach((part, index) => {
+    parts.forEach((part) => {
       if (['+', '-', '*', '/'].includes(part)) {
-        // Store the current operator
         currentOperator = part;
       } else {
-        // This is a number
         const operandObj: { operand: number, operator?: string } = {
           operand: parseFloat(part)
         };
@@ -86,21 +78,6 @@ export class AppComponent {
     }
 
     return operations;
-  }
-
-  public onSubtractionClick(requestBody: requestBody) {
-    const subtractionEndpoint = '/subtraction/';
-    this.http.post(subtractionEndpoint, requestBody).subscribe(
-      (response: any) => {
-        const resultElement = document.getElementById("input");
-        if (resultElement) {
-          resultElement.innerText = response.toString(); // Assuming your response has a "result" property
-        }
-      },
-      (error) => {
-        console.error(error); // Log the error
-      }
-    );
   }
 
   private performOperation(currentOperation: any): Promise<number> {
@@ -126,14 +103,11 @@ export class AppComponent {
     return new Promise((resolve, reject) => {
       this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {
-          console.log(response)
-          console.log(response.history as HistoryEntity[])
           this.calculationCount.set(response.response);
           this.history.set(response.history)
           resolve(response.response);
         },
         (error) => {
-          console.error(error);
           reject(error);
         }
       );
@@ -145,8 +119,8 @@ export class AppComponent {
     let operations = this.parseOperations(finalString);
 
     if (this.calculationCount() !== operations[0].operand) {
-      this.calculationCount.set(0);
-      operations[0].operator = '+';
+      this.calculationCount.set(operations[0].operand);
+      operations = operations.slice(1);
     } else {
       operations = operations.slice(1);
     }
