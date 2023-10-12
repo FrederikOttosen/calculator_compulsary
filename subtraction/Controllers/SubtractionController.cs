@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Polly;
 using Polly.Retry;
 using RestSharp;
+using OpenTelemetry.Trace;
 using subtraction.Models;
 
 namespace subtraction.Controllers;
@@ -14,12 +15,13 @@ namespace subtraction.Controllers;
 public class SubtractionController : ControllerBase
 {
     private const string BaseUrl = "http://storage-handler/";
-    private static RestClient _restClient = new RestClient(BaseUrl);
     private HttpClient _httpClient = new HttpClient();
     private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
+    private readonly Tracer _tracer;
 
-    public SubtractionController()
+    public SubtractionController(Tracer tracer)
     {
+        _tracer = tracer;
         _httpClient.BaseAddress = new Uri(BaseUrl);
         _retryPolicy = Policy.HandleResult<HttpResponseMessage>(response =>
                 !response.IsSuccessStatusCode)
@@ -30,11 +32,13 @@ public class SubtractionController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<decimal>> Subtract([FromBody] SubtractionRequest? request)
     {
+        using var startSpan = _tracer.StartActiveSpan("Subtraction_Started");
         if (request == null)
         {
             return BadRequest("Invalid input data");
         }
     
+        using var calculationSpan = _tracer.StartActiveSpan("Subtraction_Performing");
         decimal result = request.Number1 - request.Number2;
 
         List<CalculationEntity>? history = null;
@@ -46,7 +50,7 @@ public class SubtractionController : ControllerBase
         {
             Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
         }
-    
+        using var returnSpan = _tracer.StartActiveSpan("Subtraction_Completed");
         return Ok(new ResponseDto
         {
             Response = result,

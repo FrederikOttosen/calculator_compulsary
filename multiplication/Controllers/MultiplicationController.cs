@@ -6,6 +6,7 @@ using multiplication.Models;
 using Polly;
 using Polly.Retry;
 using RestSharp;
+using OpenTelemetry.Trace;
 
 namespace multiplication.Controllers;
 
@@ -15,9 +16,9 @@ public class MultiplicationController : ControllerBase
 {
     
     private const string BaseUrl = "http://storage-handler/";
-    private static RestClient _restClient = new RestClient(BaseUrl);
     private HttpClient _httpClient = new HttpClient();
     private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
+    private readonly Tracer _tracer;
     
     public MultiplicationController()
     {
@@ -31,12 +32,12 @@ public class MultiplicationController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<decimal>> Multiply([FromBody] MultiplicationRequest? request)
     {
-        
+        using var startSpan = _tracer.StartActiveSpan("Multiplication_Started");
         if (request == null || request.Number2 == 0)
         {
             return BadRequest("Invalid input data");
         }
-    
+        using var calculationSpan = _tracer.StartActiveSpan("Multiplication_Performing");
         decimal result = request.Number1 * request.Number2;
 
         List<CalculationEntity>? history = null;
@@ -48,6 +49,7 @@ public class MultiplicationController : ControllerBase
         {
             Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
         }
+        using var returnSpan = _tracer.StartActiveSpan("Multiplication_Completed");
         return Ok(new ResponseDto
         {
             Response = result,

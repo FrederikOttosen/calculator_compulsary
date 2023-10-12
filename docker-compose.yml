@@ -6,14 +6,14 @@ services:
       context: .
       dockerfile: addition/Dockerfile
     deploy:
-      replicas: 1
+      replicas: 3
         
   multiplication:
     build:
       context: .
       dockerfile: multiplication/Dockerfile
     deploy:
-      replicas: 1
+      replicas: 3
     depends_on:
       - storage-handler
       
@@ -22,14 +22,14 @@ services:
       context: .
       dockerfile: division/Dockerfile
     deploy:
-      replicas: 1
+      replicas: 3
 
   subtraction:
     build:
       context: .
       dockerfile: subtraction/Dockerfile
     deploy:
-      replicas: 1
+      replicas: 3
     restart: on-failure
     
   storage-handler:
@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: storage-handler/Dockerfile
     deploy:
-      replicas: 1
+      replicas: 3
     depends_on:
       - calculation-history-db
     restart: on-failure
