@@ -31,7 +31,7 @@ public class DivisionController: ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<decimal>> Divide([FromBody] DivisionRequest request)
+    public async Task<ActionResult<decimal>> Divide([FromBody] DivisionRequest? request)
     {
         using var startSpan = _tracer.StartActiveSpan("Division_Started");
         if (request == null || request.Number2 == 0)

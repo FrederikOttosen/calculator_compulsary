@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using addition.Models;
@@ -20,8 +21,9 @@ public class MultiplicationController : ControllerBase
     private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
     private readonly Tracer _tracer;
     
-    public MultiplicationController()
+    public MultiplicationController(Tracer tracer)
     {
+        _tracer = tracer;
         _httpClient.BaseAddress = new Uri(BaseUrl);
         _retryPolicy = Policy.HandleResult<HttpResponseMessage>(response =>
                 !response.IsSuccessStatusCode)
