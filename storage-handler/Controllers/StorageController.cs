@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Dabber;
+using System.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
@@ -58,7 +61,6 @@ public class StorageController : ControllerBase
                 new { Expression = calculationEntity.Expression, Result = calculationEntity.Result});
 
             var history = FetchCalculations();
-            
             return Ok(history);
         }
         catch(Exception ex)

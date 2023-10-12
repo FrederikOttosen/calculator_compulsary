@@ -126,10 +126,14 @@ export class AppComponent {
     return new Promise((resolve, reject) => {
       this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {
-          console.log(response)
-          console.log(response.history as HistoryEntity[])
+          const parsedHistory = response.history as HistoryEntity[]
+
+          for (let i = 0; i < parsedHistory.length; i++) {
+            console.log(parsedHistory[i].timestamp)
+          };
+
           this.calculationCount.set(response.response);
-          this.history.set(response.history)
+          this.history.set(parsedHistory)
           resolve(response.response);
         },
         (error) => {

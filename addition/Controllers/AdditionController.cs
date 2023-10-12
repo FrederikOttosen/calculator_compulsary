@@ -1,8 +1,13 @@
-﻿using addition.Models;
+﻿using System.Net;
+using System.Text;
+using addition.Models;
 using EasyNetQ;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using RestSharp;
+using System.Text.Json;
+using Polly;
+using Polly.Retry;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace addition.Controllers
 {
@@ -12,11 +17,17 @@ namespace addition.Controllers
     {
         private readonly ILogger<AdditionController> _logger;
         private const string BaseUrl = "http://storage-handler/";
-        private static RestClient _restClient = new RestClient(BaseUrl);
+        private HttpClient _httpClient = new HttpClient();
+        private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
 
         public AdditionController(ILogger<AdditionController> logger)
         {
             _logger = logger;
+            _httpClient.BaseAddress = new Uri(BaseUrl);
+            _retryPolicy = Policy.HandleResult<HttpResponseMessage>(response =>
+                !response.IsSuccessStatusCode)
+            .WaitAndRetryAsync(3, retryAttempt =>
+                TimeSpan.FromSeconds(3));
         }
 
         // [HttpPost]
@@ -68,7 +79,7 @@ namespace addition.Controllers
         // }
         
         [HttpPost]
-        public async Task<ActionResult<decimal>> Add([FromBody] AdditionRequest request)
+        public async Task<ActionResult<decimal>> Add([FromBody] AdditionRequest? request)
         {
             if (request == null)
             {
@@ -77,7 +88,7 @@ namespace addition.Controllers
     
             decimal result = request.Number1 + request.Number2;
 
-            List<CalculationEntity> history = null;
+            List<CalculationEntity>? history = null;
             try
             {
                 history = await StoreCalculationAndFetchHistory($"{request.Number1} + {request.Number2}", result);
@@ -120,7 +131,7 @@ namespace addition.Controllers
             }
         }
         
-        private async Task<List<CalculationEntity>> StoreCalculationAndFetchHistory(string expression, decimal result)
+        private async Task<List<CalculationEntity>?> StoreCalculationAndFetchHistory(string expression, decimal result)
         {
             var calculationEntity = new CalculationEntity
             {
@@ -128,25 +139,22 @@ namespace addition.Controllers
                 Result = result
             };
 
-            var saveCalculationrequest = new RestRequest("storage", Method.Post);
-            saveCalculationrequest.AddJsonBody(calculationEntity);
-    
-            var saveResponse = await _restClient.ExecuteAsync(saveCalculationrequest);
-            if (!saveResponse.IsSuccessful)
+            var saveCalculationRequest = new RestRequest("storage", Method.Post);
+            saveCalculationRequest.AddJsonBody(calculationEntity);
+
+            var serializedCalculationEntity = JsonSerializer.Serialize(calculationEntity);
+            var content = new StringContent(serializedCalculationEntity, Encoding.UTF8, "application/json");
+
+            // Execute Save Request with Polly
+            HttpResponseMessage saveResponse = await _retryPolicy.ExecuteAsync(() => _httpClient.PostAsync("storage", content));
+         
+            if (!saveResponse.IsSuccessStatusCode)
             {
-                Console.WriteLine("Failed to store calculation: " + saveResponse.ErrorMessage);
+                Console.WriteLine("Failed to store calculation: " + saveResponse.StatusCode);
                 throw new Exception("Failed to store calculation");
             }
-
-            var getCalculationRequest = new RestRequest("storage", Method.Get);
-            var getResponse = await _restClient.ExecuteAsync<List<CalculationEntity>>(getCalculationRequest);
-            if (!getResponse.IsSuccessful || getResponse.Data?.Count == 0)
-            {
-                Console.WriteLine("Failed to retrieve history: " + getResponse.ErrorMessage);
-                throw new Exception("Failed to retrieve history");
-            }
-    
-            return getResponse.Data;
+            var typedResult = await saveResponse.Content.ReadFromJsonAsync<List<CalculationEntity>>();
+            return typedResult;
         }
 
     }
