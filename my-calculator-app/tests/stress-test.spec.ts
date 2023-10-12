@@ -12,6 +12,6 @@ for (let i = 0; i < 20; i++) {
     await page.click('#result');
 
     // Wait for 15 seconds
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(90000);
   });
 }

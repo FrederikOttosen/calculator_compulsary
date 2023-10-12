@@ -137,7 +137,7 @@ export class AppComponent {
   }
 
   onClickStress() {
-    const operators = ["+"];
+    const operators = ["+", "-", "*", "/"];
     const minNumbers = 51;
     const maxNumbers = 51;
 
