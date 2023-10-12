@@ -135,4 +135,25 @@ export class AppComponent {
     this.tempCount.set('');
     this.count.set(this.calculationCount().toString());
   }
+
+  onClickStress() {
+    const operators = ["+"];
+    const minNumbers = 51;
+    const maxNumbers = 51;
+
+    // Generate a random number of operands between minNumbers and maxNumbers
+    const numOperands = Math.floor(Math.random() * (maxNumbers - minNumbers + 1)) + minNumbers;
+
+    // Initialize the calculation string with the first random number
+    let calculationString = Math.floor(Math.random() * 1000).toString();
+
+    // Add random operators and numbers to the calculation string
+    for (let i = 1; i < numOperands; i++) {
+      const operator = operators[Math.floor(Math.random() * operators.length)];
+      const operand = Math.floor(Math.random() * 1000);
+      calculationString += ` ${operator} ${operand}`;
+    }
+
+    this.tempCount.set(calculationString)
+  }
 }
