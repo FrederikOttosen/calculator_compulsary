@@ -393,6 +393,19 @@
           }
         }
       },
+      "Polly/7.2.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Polly.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Polly.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "RestSharp/110.2.1-alpha.0.13": {
         "type": "package",
         "dependencies": {
@@ -1142,6 +1155,31 @@
         "opentelemetry.instrumentation.http.nuspec"
       ]
     },
+    "Polly/7.2.4": {
+      "sha512": "bw00Ck5sh6ekduDE3mnCo1ohzuad946uslCDEENu3091+6UKnBuKLo4e+yaNcCzXxOZCXWY2gV4a35+K1d4LDA==",
+      "type": "package",
+      "path": "polly/7.2.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/Polly.dll",
+        "lib/net461/Polly.pdb",
+        "lib/net461/Polly.xml",
+        "lib/net472/Polly.dll",
+        "lib/net472/Polly.pdb",
+        "lib/net472/Polly.xml",
+        "lib/netstandard1.1/Polly.dll",
+        "lib/netstandard1.1/Polly.pdb",
+        "lib/netstandard1.1/Polly.xml",
+        "lib/netstandard2.0/Polly.dll",
+        "lib/netstandard2.0/Polly.pdb",
+        "lib/netstandard2.0/Polly.xml",
+        "package-icon.png",
+        "polly.7.2.4.nupkg.sha512",
+        "polly.nuspec"
+      ]
+    },
     "RestSharp/110.2.1-alpha.0.13": {
       "sha512": "zSNPpUdspzahAjPzbqbmCbBx+9jfUHMz/tb3vG2gjI6AeEwHmt9VA6O8nig3XOw8+hLkWbXKa0Qq381QAlva+g==",
       "type": "package",
@@ -1391,24 +1429,25 @@
       "OpenTelemetry.Extensions.Hosting >= 1.6.0",
       "OpenTelemetry.Instrumentation.AspNetCore >= 1.5.1-beta.1",
       "OpenTelemetry.Instrumentation.Http >= 1.5.1-beta.1",
+      "Polly >= 7.2.4",
       "RestSharp >= 110.2.1-alpha.0.13",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "/Users/frederikottosen/.nuget/packages/": {}
+    "/Users/mac2/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj",
+      "projectUniqueName": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
       "projectName": "subtraction",
-      "projectPath": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj",
-      "packagesPath": "/Users/frederikottosen/.nuget/packages/",
-      "outputPath": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/obj/",
+      "projectPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
+      "packagesPath": "/Users/mac2/.nuget/packages/",
+      "outputPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
+        "/Users/mac2/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -1460,6 +1499,10 @@
             "target": "Package",
             "version": "[1.5.1-beta.1, )"
           },
+          "Polly": {
+            "target": "Package",
+            "version": "[7.2.4, )"
+          },
           "RestSharp": {
             "target": "Package",
             "version": "[110.2.1-alpha.0.13, )"
@@ -1488,7 +1531,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }
