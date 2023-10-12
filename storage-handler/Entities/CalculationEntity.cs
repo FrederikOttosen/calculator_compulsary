@@ -1,3 +1,5 @@
+using System;
+
 namespace storage_handler.Entities;
 
 public class CalculationEntity

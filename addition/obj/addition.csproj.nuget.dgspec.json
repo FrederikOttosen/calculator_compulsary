@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj": {}
+    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj": {}
   },
   "projects": {
-    "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj": {
+    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj",
+        "projectUniqueName": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj",
         "projectName": "addition",
-        "projectPath": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/addition.csproj",
-        "packagesPath": "/Users/frederikottosen/.nuget/packages/",
-        "outputPath": "/Users/frederikottosen/Desktop/calculator_compulsary/addition/obj/",
+        "projectPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/addition.csproj",
+        "packagesPath": "/Users/mac2/.nuget/packages/",
+        "outputPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/addition/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
+          "/Users/mac2/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -45,6 +45,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.11, )"
+            },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[8.0.0-rc.2.23480.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -102,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }

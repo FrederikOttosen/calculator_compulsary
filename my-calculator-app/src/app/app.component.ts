@@ -103,8 +103,9 @@ export class AppComponent {
     return new Promise((resolve, reject) => {
       this.http.post(endpoint, {Number1: this.calculationCount(), Number2: numberToAdd}).subscribe(
         (response: any) => {
+          const parsedHistory = response.history as HistoryEntity[]
           this.calculationCount.set(response.response);
-          this.history.set(response.history)
+          this.history.set(parsedHistory)
           resolve(response.response);
         },
         (error) => {

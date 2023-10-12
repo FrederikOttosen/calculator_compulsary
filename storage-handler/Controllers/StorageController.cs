@@ -66,7 +66,6 @@ public class StorageController : ControllerBase
 
             using var getPerformingSpan = _tracer.StartActiveSpan("StorageHandler_GetInsidePost_Performing");
             var history = FetchCalculations();
-            
             using var returnSpan = _tracer.StartActiveSpan("StorageHandler_Post_Completed");
             return Ok(history);
         }

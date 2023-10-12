@@ -1,4 +1,7 @@
-namespace addition.Models;
+using addition.Models;
+using division.Models;
+
+namespace division.Models;
 
 public class ResponseDto
 {
