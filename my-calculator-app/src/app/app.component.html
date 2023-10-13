@@ -1,7 +1,7 @@
 <div class="MainWrapper">
 
   <div id="calculator">
-    <div id="input-wrap">
+    <div class="myFont" id="input-wrap">
       <div id="tmp">{{tempCount()}}</div>
       <div id="input">{{count()}}</div>
     </div>
@@ -32,16 +32,27 @@
     </div>
   </div>
 
-  <div class="RightContainer">
-    <app-loader *ngIf="loading"></app-loader>
-
-    <article *ngIf="!loading" class="HistoryContainer">
-      <h1 style="align-self: center;">Calculation history</h1>
-      <ul *ngFor="let item of history()">
-        {{item.expression}} = {{item.result}} on {{item.timestamp}}
-      </ul>
-    </article>
+  <div class="myFont" style="height: 585px" id="calculator">
+    <div id="input-wrap-new">
+      <article *ngIf="!loading" class="HistoryContainer">
+        <h1 style="align-self: center;">Calculation history</h1>
+        <div style="align-self: center; padding: 10px" *ngFor="let item of history()">
+          {{item.expression}} = {{item.result}} on {{item.timestamp}}
+        </div>
+      </article>
+    </div>
   </div>
+
+<!--  <div class="RightContainer">-->
+<!--    <app-loader *ngIf="loading"></app-loader>-->
+
+<!--    <article *ngIf="!loading" class="HistoryContainer">-->
+<!--      <h1 class="myFont" style="align-self: center;">Calculation history</h1>-->
+<!--      <ul class="myFont" *ngFor="let item of history()">-->
+<!--        {{item.expression}} = {{item.result}} on {{item.timestamp}}-->
+<!--      </ul>-->
+<!--    </article>-->
+<!--  </div>-->
 
 </div>
 

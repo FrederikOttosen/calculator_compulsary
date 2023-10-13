@@ -52,6 +52,17 @@ body {
   box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
 }
 
+#input-wrap-new{
+  position: relative;
+  width: calc(100% - 4px);
+  height: 100%;
+  margin-bottom: 5px;
+  padding: 0 5px;
+  background: #a1bd66;
+  text-align: right;
+  box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
 #input {
   height: 5rem;
   line-height: 5rem;
@@ -106,8 +117,25 @@ body {
 .HistoryContainer{
   color: #f1f1f1;
   display: flex;
+  max-height: 535px;
   flex-direction: column;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   gap: 0.2rem;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Firefox */
+@-moz-document url-prefix() {
+  .HistoryContainer{
+    scrollbar-width: none; /* Firefox 64 */
+  }
 }
 
 .ButtonContainer{
@@ -118,9 +146,11 @@ body {
 .MainWrapper{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  height: 80vh;
   padding-top: 100px;
+  gap: 60px;
 }
 
 .RightContainer{
@@ -132,4 +162,10 @@ body {
   justify-content: center;
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+.myFont{
+  font-family: 'Segment7Standard';
+  font-weight: normal;
+  font-style: italic;
 }
