@@ -17,7 +17,7 @@ export class AppComponent {
   count = signal<string>('');
   tempCount = signal<string>('');
   calculationCount = signal<number>(0);
-  history = signal<HistoryEntity[]>([])
+  history = signal<HistoryEntity[]>([]);
   loading = false
 
   constructor(
@@ -163,7 +163,7 @@ export class AppComponent {
       calculationString += ` ${operator} ${operand}`;
     }
 
-    this.tempCount.set(calculationString)
+    this.tempCount.set(calculationString);
   }
 
   private fetchHistory() {

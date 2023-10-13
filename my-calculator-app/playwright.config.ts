@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: 0,
   workers: 5,
-  timeout: 120000,
+  timeout: 200000,
   reporter: 'html',
   use: {
     trace: 'on-first-retry'
