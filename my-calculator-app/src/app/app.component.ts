@@ -18,6 +18,7 @@ export class AppComponent {
   tempCount = signal<string>('');
   calculationCount = signal<number>(0);
   history = signal<HistoryEntity[]>([])
+  loading = false
 
   constructor(
     private http: HttpClient) {
@@ -37,6 +38,8 @@ export class AppComponent {
   }
 
   onClickClearAll() {
+    this.clearHistory();
+    this.history.set([])
     this.count.set('');
     this.tempCount.set('');
     this.calculationCount.set(0);
@@ -135,6 +138,11 @@ export class AppComponent {
 
     this.tempCount.set('');
     this.count.set(this.calculationCount().toString());
+
+    this.loading = true;
+    setTimeout(() => {
+      this.fetchHistory();
+    }, 3000);
   }
 
   onClickStress() {
@@ -156,5 +164,23 @@ export class AppComponent {
     }
 
     this.tempCount.set(calculationString)
+  }
+
+  private fetchHistory() {
+      this.http.get('/storage-handler/').subscribe((response: any) => {
+        console.log(response)
+        const parsedHistory = response as HistoryEntity[]
+        this.history.set(parsedHistory)
+        this.loading = false
+        }
+      );
+  }
+
+  clearHistory(){
+    console.log('called my endpoint')
+    this.http.delete('/storage-handler/').subscribe(() => {
+      console.log('cleared');
+      }
+    );
   }
 }

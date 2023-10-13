@@ -6,14 +6,14 @@ services:
       context: .
       dockerfile: addition/Dockerfile
     deploy:
-      replicas: 3
+      replicas: 1
         
   multiplication:
     build:
       context: .
       dockerfile: multiplication/Dockerfile
     deploy:
-      replicas: 3
+      replicas: 1
     depends_on:
       - storage-handler
       
@@ -22,14 +22,14 @@ services:
       context: .
       dockerfile: division/Dockerfile
     deploy:
-      replicas: 3
+      replicas: 1
 
   subtraction:
     build:
       context: .
       dockerfile: subtraction/Dockerfile
     deploy:
-      replicas: 3
+      replicas: 1
     restart: on-failure
     
   storage-handler:
@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: storage-handler/Dockerfile
     deploy:
-      replicas: 3
+      replicas: 1
     depends_on:
       - calculation-history-db
     restart: on-failure
@@ -76,6 +76,7 @@ services:
       - subtraction
       - multiplication
       - division
+      - storage-handler
 
   calculation-history-db:
     image: "mysql"
