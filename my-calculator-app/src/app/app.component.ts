@@ -142,7 +142,7 @@ export class AppComponent {
     this.loading = true;
     setTimeout(() => {
       this.fetchHistory();
-    }, 3000);
+    }, 1500);
   }
 
   onClickStress() {
