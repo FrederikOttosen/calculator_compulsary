@@ -8,7 +8,7 @@ using OpenTelemetry.Trace;
 namespace storage_handler.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/storage")]
 public class StorageController : ControllerBase
 {
     private static IDbConnection _dbConnection = new MySqlConnection("Server=calculation-history-db;Database=calculation-history-database;Uid=calculatorHistory;Pwd=C@ch3d1v;");
@@ -34,7 +34,7 @@ public class StorageController : ControllerBase
             using var performingSpan = _tracer.StartActiveSpan("StorageHandler_Get_Performing");
             var result = FetchCalculations();
             Console.WriteLine(result);
-            if (result == null || result.Count == 0)
+            if (result.Count == 0)
             {
                 return NotFound("No calculations found.");
             }
@@ -65,9 +65,8 @@ public class StorageController : ControllerBase
                 new { Expression = calculationEntity.Expression, Result = calculationEntity.Result});
 
             using var getPerformingSpan = _tracer.StartActiveSpan("StorageHandler_GetInsidePost_Performing");
-            var history = FetchCalculations();
             using var returnSpan = _tracer.StartActiveSpan("StorageHandler_Post_Completed");
-            return Ok(history);
+            return Ok();
         }
         catch(Exception ex)
         {
@@ -82,7 +81,7 @@ public class StorageController : ControllerBase
         try
         {
             // Execute SQL to delete all records from the Calculations table
-            _dbConnection.Execute("DELETE FROM calculations WHERE calculationId > 0 ;");
+            _dbConnection.Execute("DELETE FROM calculations WHERE calculationId > 0;");
         
             return Ok("All calculations deleted.");
         }

@@ -14,5 +14,9 @@
   "/multiplication/": {
     "target": "http://localhost:80",
     "secure": false
+  },
+  "/storage-handler/": {
+    "target": "http://localhost:80",
+    "secure": false
   }
 }

@@ -6,7 +6,6 @@ using division.Models;
 using OpenTelemetry.Trace;
 using Polly;
 using Polly.Retry;
-using RestSharp;
 
 namespace division.Controllers;
 
@@ -31,57 +30,38 @@ public class DivisionController: ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<decimal>> Divide([FromBody] DivisionRequest? request)
+    public Task<ActionResult<decimal>> Divide([FromBody] DivisionRequest? request)
     {
         using var startSpan = _tracer.StartActiveSpan("Division_Started");
         if (request == null || request.Number2 == 0)
         {
-            return BadRequest("Invalid input data");
+            return Task.FromResult<ActionResult<decimal>>(BadRequest("Invalid input data"));
         }
     
         using var calculationSpan = _tracer.StartActiveSpan("Division_Performing");
         decimal result = request.Number1 / request.Number2;
 
-        List<CalculationEntity>? history = null;
-        try
-        {
-            history = await StoreCalculationAndFetchHistory($"{request.Number1} / {request.Number2}", result);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Exception in storage/history retrieval: {ex.Message}. StackTrace: {ex.StackTrace}");
-        }
+        var _ = StoreCalculationAndFetchHistory($"{request.Number1} / {request.Number2}", result);
+        
         using var returnSpan = _tracer.StartActiveSpan("Division_Completed");
-        return Ok(new ResponseDto
+        return Task.FromResult<ActionResult<decimal>>(Ok(new ResponseDto
         {
-            Response = result,
-            History = history
-        });
+            Response = result
+        }));
     }
     
-    private async Task<List<CalculationEntity>?> StoreCalculationAndFetchHistory(string expression, decimal result)
+    private async Task StoreCalculationAndFetchHistory(string expression, decimal result)
     {
         var calculationEntity = new CalculationEntity
         {
             Expression = expression,
             Result = result
         };
-
-        var saveCalculationRequest = new RestRequest("storage", Method.Post);
-        saveCalculationRequest.AddJsonBody(calculationEntity);
-
+        
         var serializedCalculationEntity = JsonSerializer.Serialize(calculationEntity);
         var content = new StringContent(serializedCalculationEntity, Encoding.UTF8, "application/json");
-
-        // Execute Save Request with Polly
-        HttpResponseMessage saveResponse = await _retryPolicy.ExecuteAsync(() => _httpClient.PostAsync("storage", content));
-         
-        if (!saveResponse.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Failed to store calculation: " + saveResponse.StatusCode);
-            throw new Exception("Failed to store calculation");
-        }
-        var typedResult = await saveResponse.Content.ReadFromJsonAsync<List<CalculationEntity>>();
-        return typedResult;
+        
+        // Execute Save Request with Polly will retry 3 times with waiting in between
+        await _retryPolicy.ExecuteAsync(() =>  _httpClient.PostAsync("storage", content));
     }
 }

@@ -1,10 +1,4 @@
 <div class="MainWrapper">
-  <article class="ButtonContainer">
-    <button (click)="performCalculation('/addition/', 5)">Addition</button>
-    <button (click)="performCalculation('/multiplication/', 5)">Multiplicaation</button>
-    <button (click)="performCalculation('/subtraction/', 5)">Subtraction</button>
-    <button (click)="performCalculation('/division/', 5)">Division</button>
-  </article>
 
   <div id="calculator">
     <div id="input-wrap">
@@ -38,11 +32,16 @@
     </div>
   </div>
 
-  <article class="HistoryContainer">
-    <h1>Calculation history</h1>
-    <ul *ngFor="let item of history()">
-      {{item.expression}} = {{item.result}} on {{item.timestamp}}
-    </ul>
-  </article>
+  <div class="RightContainer">
+    <app-loader *ngIf="loading"></app-loader>
+
+    <article *ngIf="!loading" class="HistoryContainer">
+      <h1 style="align-self: center;">Calculation history</h1>
+      <ul *ngFor="let item of history()">
+        {{item.expression}} = {{item.result}} on {{item.timestamp}}
+      </ul>
+    </article>
+  </div>
+
 </div>
 
