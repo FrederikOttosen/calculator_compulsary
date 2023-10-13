@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj": {}
+    "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj": {}
   },
   "projects": {
-    "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj": {
+    "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
+        "projectUniqueName": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj",
         "projectName": "subtraction",
-        "projectPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/subtraction.csproj",
-        "packagesPath": "/Users/mac2/.nuget/packages/",
-        "outputPath": "/Users/mac2/Documents/2nd_Semester-topup/Untitled/calculator_compulsary/subtraction/obj/",
+        "projectPath": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/subtraction.csproj",
+        "packagesPath": "/Users/frederikottosen/.nuget/packages/",
+        "outputPath": "/Users/frederikottosen/Desktop/calculator_compulsary/subtraction/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/mac2/.nuget/NuGet/NuGet.Config"
+          "/Users/frederikottosen/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -98,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }
